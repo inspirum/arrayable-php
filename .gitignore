@@ -1,0 +1,12 @@
+/.idea/
+/.phive/
+/tools/
+/var/
+/vendor/
+/*.env
+/composer.lock
+/coverage.clover
+/phpunit.xml
+/.phpunit.result.cache
+/.phpcs-cache
+/phpcs.xml
