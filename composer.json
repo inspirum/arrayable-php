@@ -3,7 +3,8 @@
   "description": "PHP arrayable interface for handling casting to an array",
   "keywords": [
     "inspirum",
-    "arrayable"
+    "arrayable",
+    "object-to-array"
   ],
   "homepage": "https://github.com/inspirum/arrayable-php",
   "license": "MIT",
@@ -38,7 +39,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Inspirum\\XML\\Tests\\": "tests"
+      "Inspirum\\Arrayable\\Tests\\": "tests"
     }
   },
   "minimum-stability": "dev",

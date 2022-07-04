@@ -13,8 +13,13 @@
 
 ## Motivation
 
+Unfortunately PHP does not have a nice way how to typecast objects to `array`.
 
-Unfortunately PHP does not have a nice way how to typecast objects to `array`, like:
+There is the `__toString()` magic method for [`\Stringable`](https://www.php.net/manual/en/class.stringable.php) interface (since PHP 8.0) and the `jsonSerialize()` method for [`JsonSerializable`](https://www.php.net/manual/en/class.jsonserializable.php) interface (since PHP 5.4), but `__toArray()` method is not (and will not) be supported – there are just several rejected draft RFC ([object_cast_to_types](https://wiki.php.net/rfc/object_cast_to_types), [to array](https://wiki.php.net/rfc/to-array), ...) that suggests some kind of object to scalar type casting.
+
+But so far (at least) there is no way to implement some (not even magic) method to be called when cast to `array`.
+
+Ideally, something like this would work:
 
 ```php
 class Person
@@ -47,7 +52,7 @@ var_dump($personArray);
 */
 ```
 
-But actually it cast to array like this:
+but actually it cast to array like this:
 
 ```php
 /*
@@ -59,9 +64,6 @@ var_dump($personArray);
 ]
 */
 ```
-
-There is the [`__toString`](https://www.php.net/manual/en/class.stringable.php) magic method (since PHP 8.0) and the [`JsonSerializable`](https://www.php.net/manual/en/class.jsonserializable.php) interface (since PHP 5.4), but `__toArray` method is not (and will not) be supported. 
-There are just several rejected draft RFC ([object_cast_to_types](https://wiki.php.net/rfc/object_cast_to_types), [to array](https://wiki.php.net/rfc/to-array), ...) that suggests some kind of object to scalar type casting.
 
 
 ## Usage example
