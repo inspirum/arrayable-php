@@ -19,14 +19,22 @@ abstract class BaseModel implements Arrayable, JsonSerializable, Stringable
     /**
      * @return array<TKey, TValue>
      */
-    abstract public function toArray(): array;
+    abstract public function __toArray(): array;
+
+    /**
+     * @return array<TKey, TValue>
+     */
+    public function toArray(): array
+    {
+        return $this->__toArray();
+    }
 
     /**
      * @return array<TKey, TValue>
      */
     public function jsonSerialize(): array
     {
-        return $this->toArray();
+        return $this->__toArray();
     }
 
     public function __toString(): string

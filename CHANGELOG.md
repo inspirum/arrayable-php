@@ -9,10 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased](https://github.com/inspirum/arrayable-php/compare/v1.0.0...master)
 
 
-## v1.0.0 (2022-06-28) 
+## v1.0.0 (2022-07-04) 
 ### Added
 - Added [**Arrayable**](./src/Arrayable.php) interface
-- Added [**Convertor**](./src/Arrayable.php) helper class
+- Added [**Convertor**](./src/Convertor.php) helper class
 - Added [**BaseCollection**](./src/BaseCollection.php) abstract class
 - Added [**BaseModel**](./src/BaseModel.php) abstract class
 - Added [**\Arrayable**](./core/Arrayable.php) interface without namespace

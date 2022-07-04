@@ -13,5 +13,5 @@ interface Arrayable
     /**
      * @return array<TKey, TValue>
      */
-    public function toArray(): array;
+    public function __toArray(): array;
 }

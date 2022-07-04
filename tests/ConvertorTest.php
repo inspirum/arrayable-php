@@ -28,6 +28,7 @@ final class ConvertorTest extends TestCase
             self::expectExceptionMessage($result->getMessage());
         }
 
+        self::assertSame(!($result instanceof Throwable), Convertor::isArrayable($data));
         self::assertEquals($result, Convertor::toArray($data, $limit));
     }
 
@@ -71,7 +72,7 @@ final class ConvertorTest extends TestCase
                 /**
                  * @return array<mixed>
                  */
-                public function toArray(): array
+                public function __toArray(): array
                 {
                     return ['1', 2, 'test'];
                 }
@@ -84,7 +85,7 @@ final class ConvertorTest extends TestCase
                 /**
                  * @return array<mixed>
                  */
-                public function toArray(): array
+                public function __toArray(): array
                 {
                     return ['1' => 2, '3' => 5];
                 }
@@ -120,7 +121,7 @@ final class ConvertorTest extends TestCase
                                 /**
                                  * @return array<mixed>
                                  */
-                                public function toArray(): array
+                                public function __toArray(): array
                                 {
                                     return ['1', 2, 'test'];
                                 }

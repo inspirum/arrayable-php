@@ -10,58 +10,119 @@
 [![Total Downloads][ico-packagist-download]][link-packagist-download]
 [![Software License][ico-license]][link-licence]
 
-Unfortunately PHP does not have a nice way how to typecast objects to `array`. 
 
-As said in a [StackOverflow answer](https://stackoverflow.com/a/11841944/15458660), there is only the `JsonSerializable` interface (since PHP 5.4.0) and several rejected draft RFC that suggests a `__toArray()` method.
+## Motivation
+
+
+Unfortunately PHP does not have a nice way how to typecast objects to `array`, like:
+
+```php
+class Person
+{
+    public function __construct(
+        public string $name,
+        protected string $username,
+        private string $password,
+    ) {}
+ 
+    public function __toArray(): array
+    {
+        return [
+            'name' => $this->name,
+            'email' => $this->username,
+        ];
+    }
+}
+
+$person = new Person('John Doe', 'j.doe@example.com', 'secret_pwd');
+
+$personArray = (array) $person; // casting triggers __toArray()
+
+/*
+var_dump($personArray);
+[
+  "name" => "John Doe"
+  "email" => "j.doe@example.com"
+]
+*/
+```
+
+But actually it cast to array like this:
+
+```php
+/*
+var_dump($personArray);
+[
+  "name" => "John Doe"
+  "*username" => "j.doe@example.com"
+  "Person@password" => "secret_pwd"
+]
+*/
+```
+
+There is the [`__toString`](https://www.php.net/manual/en/class.stringable.php) magic method (since PHP 8.0) and the [`JsonSerializable`](https://www.php.net/manual/en/class.jsonserializable.php) interface (since PHP 5.4), but `__toArray` method is not (and will not) be supported. 
+There are just several rejected draft RFC ([object_cast_to_types](https://wiki.php.net/rfc/object_cast_to_types), [to array](https://wiki.php.net/rfc/to-array), ...) that suggests some kind of object to scalar type casting.
 
 
 ## Usage example
 
 *All the code snippets shown here are modified for clarity, so they may not be executable.*
 
+This package implements simple `\Arrayable` (or `\Inspirum\Arrayable\Arrayable`) interface.
+
 ```php
-use Inspirum\Arrayable\Arrayable;
-use Inspirum\Arrayable\Convertor;
-
-$data = new class(100.0, [14.99, 39.99, 0.68]) implements Arrayable {
-            
+/** @implements \Arrayable<string, string> */
+class Person implements \Arrayable
+{
     public function __construct(
-        private float $price,
-        private array $itemPrices,
+        public string $name,
+        protected string $username,
+        protected string $password,
     ) {}
-
-    public function toArray(): array
+ 
+    /** @return array<string, string> */
+    public function __toArray(): array
     {
         return [
-            'price' => $this->price,
-            'itemPrices' => array_sum($this->itemPrices),
-            'valid' => true,
+            'name' => $this->name,
+            'email' => $this->username,
         ];
     }
-};
+}
+
+$person = new Person('John Doe', 'j.doe@example.com', 'secret_pwd');
+```
+
+There is `is_arrayable()` function (or `\Inspirum\Arrayable\Convertor::isArrayable()` method) to check if given data are able to type cast itself to `array`.
+
+```php
+var_dump(is_arrayable([1, 2, 3])); // bool(true)
+var_dump(is_arrayable(new \ArrayIterator([1, 2, 3]))); // bool(true)
+var_dump(is_arrayable(new \ArrayObject([4, 5, 6]))); // bool(true)
+var_dump(is_arrayable((function () { yield 1; })())); // bool(true)
+var_dump(is_arrayable(1)); // bool(false)
+var_dump(is_arrayable(new \stdClass())); // bool(false)
+var_dump(is_arrayable(new class {})); // bool(false)
+var_dump(is_arrayable(new class implements \Arrayable {})); // bool(true)
+var_dump(is_arrayable($person); // bool(true)
+```
+
+Then there is `to_array()` function (or `\Inspirum\Arrayable\Convertor::toArray()` method) to recursively cast data to `array`.
+
+```php
+$personArray = to_array($person);
 
 /*
-var_dump((array) $data);
+var_dump($personArray);
 [
-  [class@price"] => 100.0
-  [class@itemPrices"] => [
-     0 => 14.99
-     1 => 39.99
-     2 => 0.68
-  ]
-]
-*/
-
-$array = Convertor::toArray($data);
-/*
-var_dump($array));
-[
-  'price' => 100.0
-  'itemPrices' => 55.66
-  'valid' => true
+  "name" => "John Doe"
+  "*username" => "j.doe@example.com"
+  "*password" => "secret_pwd"
 ]
 */
 ```
+
+There is also helper abstract classes for common use for DAO ([`BaseModel`](./src/BaseModel.php)) and collection ([`BaseCollection`](./src/BaseCollection.php)) objects.
 
 
 ## Testing

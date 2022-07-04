@@ -10,6 +10,7 @@ use PHPUnit\Framework\TestCase;
 use Throwable;
 use function array_map;
 use function iterator_to_array;
+use function json_encode;
 
 final class BaseCollectionTest extends TestCase
 {
@@ -30,6 +31,7 @@ final class BaseCollectionTest extends TestCase
         $collection = new class ($items) extends BaseCollection {
         };
 
+        self::assertSame($data, $collection->__toArray());
         self::assertSame($data, $collection->toArray());
         self::assertSame($data, $collection->jsonSerialize());
         self::assertSame($result, (string) $collection);
@@ -71,9 +73,13 @@ final class BaseCollectionTest extends TestCase
         self::assertTrue(isset($collection['first']));
         unset($collection['first']);
         self::assertFalse(isset($collection['first']));
-        self::assertSame([4, 5, 6], $collection['second']->toArray());
+        self::assertSame([4, 5, 6], $collection['second']->__toArray());
         $collection['second'] = $this->createModel(['foo' => 'bar']);
-        self::assertSame(['foo' => 'bar'], $collection['second']->toArray());
+        $collection->offsetAdd($this->createModel(['bar1' => 'foo']));
+        $collection->offsetAdd($this->createModel(['bar2' => 'foo']));
+
+        self::assertSame(['foo' => 'bar'], $collection['second']->__toArray());
+        self::assertSame(['bar2' => 'foo'], $collection[1]->__toArray());
 
         self::assertSame($collection->getItems(), iterator_to_array($collection));
     }
@@ -96,7 +102,7 @@ final class BaseCollectionTest extends TestCase
             /**
              * @return array<mixed>
              */
-            public function toArray(): array
+            public function __toArray(): array
             {
                 return $this->data;
             }

@@ -20,7 +20,7 @@
     "ext-json": "*"
   },
   "require-dev": {
-    "inspirum/coding-standard": "^1.0",
+    "inspirum/coding-standard": "^1.1",
     "phpstan/phpstan": "^1.8",
     "phpunit/phpunit": "^9.5",
     "squizlabs/php_codesniffer": "^3.7"
@@ -41,6 +41,8 @@
       "Inspirum\\XML\\Tests\\": "tests"
     }
   },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "config": {
     "sort-packages": true,
     "allow-plugins": {

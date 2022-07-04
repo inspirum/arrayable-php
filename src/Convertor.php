@@ -9,6 +9,7 @@ use Traversable;
 use UnexpectedValueException;
 use stdClass;
 use function is_array;
+use function is_iterable;
 use function iterator_to_array;
 use const PHP_INT_MAX;
 
@@ -49,7 +50,7 @@ final class Convertor
         if ($data instanceof Traversable) {
             $data = iterator_to_array($data);
         } elseif ($data instanceof Arrayable) {
-            $data = $data->toArray();
+            $data = $data->__toArray();
         } elseif ($data instanceof stdClass) {
             $data = (array) $data;
         }

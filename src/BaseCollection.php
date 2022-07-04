@@ -32,7 +32,7 @@ abstract class BaseCollection implements ArrayAccess, Countable, IteratorAggrega
      * @param array<TKey, TValue> $items
      */
     public function __construct(
-        private array $items,
+        protected array $items,
     ) {
     }
 
@@ -61,6 +61,14 @@ abstract class BaseCollection implements ArrayAccess, Countable, IteratorAggrega
     public function offsetSet(mixed $key, mixed $value): void
     {
         $this->items[$key] = $value;
+    }
+
+    /**
+     * @param TValue $value
+     */
+    public function offsetAdd(mixed $value): void
+    {
+        $this->items[] = $value;
     }
 
     /**
@@ -95,9 +103,17 @@ abstract class BaseCollection implements ArrayAccess, Countable, IteratorAggrega
     /**
      * @return array<TKey, array<TItemKey, TItemValue>>
      */
+    public function __toArray(): array
+    {
+        return array_map(static fn(Arrayable $item): array => $item->__toArray(), $this->items);
+    }
+
+    /**
+     * @return array<TKey, array<TItemKey, TItemValue>>
+     */
     public function toArray(): array
     {
-        return array_map(static fn(Arrayable $item): array => $item->toArray(), $this->items);
+        return $this->__toArray();
     }
 
     /**
@@ -105,7 +121,7 @@ abstract class BaseCollection implements ArrayAccess, Countable, IteratorAggrega
      */
     public function jsonSerialize(): array
     {
-        return $this->toArray();
+        return $this->__toArray();
     }
 
     public function __toString(): string

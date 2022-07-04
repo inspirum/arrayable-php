@@ -7,6 +7,7 @@ namespace Inspirum\Arrayable\Tests;
 use Inspirum\Arrayable\BaseModel;
 use PHPUnit\Framework\TestCase;
 use Throwable;
+use function json_encode;
 
 final class BaseModelTest extends TestCase
 {
@@ -31,12 +32,13 @@ final class BaseModelTest extends TestCase
             /**
              * @return array<mixed>
              */
-            public function toArray(): array
+            public function __toArray(): array
             {
                 return $this->data;
             }
         };
 
+        self::assertSame($data, $model->__toArray());
         self::assertSame($data, $model->toArray());
         self::assertSame($data, $model->jsonSerialize());
         self::assertSame($result, (string) $model);
