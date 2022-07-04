@@ -12,9 +12,11 @@ use function json_encode;
 final class BaseModelTest extends TestCase
 {
     /**
+     * @param array<mixed> $data
+     *
      * @dataProvider providesToArray
      */
-    public function testJsonSerialize(mixed $data, string|Throwable $result): void
+    public function testJsonSerialize(array $data, string|Throwable $result): void
     {
         if ($result instanceof Throwable) {
             self::expectException($result::class);

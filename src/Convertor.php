@@ -37,6 +37,9 @@ final class Convertor
         return self::toArrayWithDepth($data, $limit ?? PHP_INT_MAX, 1);
     }
 
+    /**
+     * @return ($depth is 1 ? array<mixed> : mixed)
+     */
     private static function toArrayWithDepth(mixed $data, int $limit, int $depth): mixed
     {
         if ($limit <= 0) {
