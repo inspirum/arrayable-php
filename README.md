@@ -127,6 +127,20 @@ var_dump($personArray);
 There is also helper abstract classes for common use for DAO ([`BaseModel`](./src/BaseModel.php)) and collection ([`BaseCollection`](./src/BaseCollection.php)) objects.
 
 
+## System requirements
+
+* [PHP 8.0+](http://php.net/releases/8_0_0.php)
+* [ext-json](http://php.net/json)
+
+
+## Installation
+
+Run composer require command
+```bash
+$ composer require inspirum/arrayable
+```
+
+
 ## Testing
 
 To run unit tests, run:
