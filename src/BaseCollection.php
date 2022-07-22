@@ -4,12 +4,7 @@ declare(strict_types=1);
 
 namespace Inspirum\Arrayable;
 
-use ArrayAccess;
 use ArrayIterator;
-use Countable;
-use IteratorAggregate;
-use JsonSerializable;
-use Stringable;
 use Traversable;
 use function array_key_exists;
 use function array_map;
@@ -21,18 +16,16 @@ use const JSON_THROW_ON_ERROR;
  * @template TItemKey of array-key
  * @template TItemValue
  * @template TKey of array-key
- * @template TValue of \Inspirum\Arrayable\Arrayable<TItemKey, TItemValue>
- * @implements \ArrayAccess<TKey, TValue>
- * @implements \IteratorAggregate<TKey, TValue>
- * @implements \Inspirum\Arrayable\Arrayable<TKey, array<TItemKey, TItemValue>>
+ * @template TValue of \Inspirum\Arrayable\Arrayable<TItemKey,TItemValue>
+ * @implements \Inspirum\Arrayable\Collection<TItemKey,TItemValue,TKey,TValue>
  */
-abstract class BaseCollection implements ArrayAccess, Countable, IteratorAggregate, Arrayable, JsonSerializable, Stringable
+abstract class BaseCollection implements Collection
 {
     /**
      * @param array<TKey, TValue> $items
      */
     public function __construct(
-        protected array $items,
+        protected array $items = [],
     ) {
     }
 
