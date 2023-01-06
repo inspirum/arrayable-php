@@ -35,6 +35,9 @@ abstract class BaseModel implements Model
         return $this->__toArray();
     }
 
+    /**
+     * @throws \JsonException
+     */
     public function __toString(): string
     {
         return json_encode($this->jsonSerialize(), JSON_THROW_ON_ERROR);

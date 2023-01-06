@@ -30,30 +30,30 @@ abstract class BaseCollection implements Collection
     }
 
     /**
-     * @param TKey $key
+     * @param TKey $offset
      */
-    public function offsetExists(mixed $key): bool
+    public function offsetExists(mixed $offset): bool
     {
-        return array_key_exists($key, $this->items);
+        return array_key_exists($offset, $this->items);
     }
 
     /**
-     * @param TKey $key
+     * @param TKey $offset
      *
      * @return TValue
      */
-    public function offsetGet(mixed $key): mixed
+    public function offsetGet(mixed $offset): mixed
     {
-        return $this->items[$key];
+        return $this->items[$offset];
     }
 
     /**
-     * @param TKey   $key
+     * @param TKey   $offset
      * @param TValue $value
      */
-    public function offsetSet(mixed $key, mixed $value): void
+    public function offsetSet(mixed $offset, mixed $value): void
     {
-        $this->items[$key] = $value;
+        $this->items[$offset] = $value;
     }
 
     /**
@@ -65,11 +65,11 @@ abstract class BaseCollection implements Collection
     }
 
     /**
-     * @param TKey $key
+     * @param TKey $offset
      */
-    public function offsetUnset(mixed $key): void
+    public function offsetUnset(mixed $offset): void
     {
-        unset($this->items[$key]);
+        unset($this->items[$offset]);
     }
 
     public function count(): int
@@ -117,6 +117,9 @@ abstract class BaseCollection implements Collection
         return $this->__toArray();
     }
 
+    /**
+     * @throws \JsonException
+     */
     public function __toString(): string
     {
         return json_encode($this->jsonSerialize(), JSON_THROW_ON_ERROR);

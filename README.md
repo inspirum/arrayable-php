@@ -178,7 +178,7 @@ The MIT License (MIT). Please see [License File][link-licence] for more informat
 
 
 [ico-license]:              https://img.shields.io/github/license/inspirum/arrayable-php.svg?style=flat-square&colorB=blue
-[ico-workflow]:             https://img.shields.io/github/workflow/status/inspirum/arrayable-php/Test/master?style=flat-square
+[ico-workflow]:             https://img.shields.io/github/actions/workflow/status/inspirum/arrayable-php/master.yml?branch=master&style=flat-square
 [ico-scrutinizer]:          https://img.shields.io/scrutinizer/coverage/g/inspirum/arrayable-php/master.svg?style=flat-square
 [ico-code-quality]:         https://img.shields.io/scrutinizer/g/inspirum/arrayable-php.svg?style=flat-square
 [ico-packagist-stable]:     https://img.shields.io/packagist/v/inspirum/arrayable.svg?style=flat-square&colorB=blue
