@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 
 ## [Unreleased](https://github.com/inspirum/arrayable-php/compare/v1.1.0...master)
+### Added
+- Added support for **PHP 8.2**
 
 
 ## [v1.1.0 (2022-07-22)](https://github.com/inspirum/balikobot-php/compare/v1.0.0...v1.1.0)
