@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 use Inspirum\Arrayable\Convertor;
 
-if (function_exists('is_arrayable') === false) {
+if (function_exists('\is_arrayable') === false) {
     /**
      * Can be cast to array
      */
@@ -12,7 +14,7 @@ if (function_exists('is_arrayable') === false) {
     }
 }
 
-if (function_exists('to_array') === false) {
+if (function_exists('\to_array') === false) {
     /**
      * Cast anything to array
      *

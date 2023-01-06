@@ -43,11 +43,11 @@ $person = new Person('John Doe', 'j.doe@example.com', 'secret_pwd');
 
 $personArray = (array) $person; // casting triggers __toArray()
 
-/*
+/**
 var_dump($personArray);
 [
-  "name" => "John Doe"
-  "email" => "j.doe@example.com"
+  'name' => 'John Doe'
+  'email' => 'j.doe@example.com'
 ]
 */
 ```
@@ -55,12 +55,12 @@ var_dump($personArray);
 but actually it cast to array like this:
 
 ```php
-/*
+/**
 var_dump($personArray);
 [
-  "name" => "John Doe"
-  "*username" => "j.doe@example.com"
-  "Person@password" => "secret_pwd"
+  'name' => 'John Doe'
+  '*username' => 'j.doe@example.com'
+  'Person@password' => 'secret_pwd'
 ]
 */
 ```
@@ -112,15 +112,19 @@ var_dump(is_arrayable($person); // bool(true)
 Then there is `to_array()` function (or `\Inspirum\Arrayable\Convertor::toArray()` method) to recursively cast data to `array`.
 
 ```php
-$personArray = to_array($person);
+$data = to_array(new \ArrayIterator([1, $person, (object) ['a' => true]]));
 
-/*
-var_dump($personArray);
+/**
+var_dump($data);
 [
-  "name" => "John Doe"
-  "*username" => "j.doe@example.com"
-  "*password" => "secret_pwd"
-]
+  0 => 1
+  1 => [ 
+    'name' => 'John Doe'
+    'email' => 'j.doe@example.com'
+  ]
+  2 => [
+   'a' => true
+  ]
 */
 ```
 
