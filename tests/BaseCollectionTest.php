@@ -6,6 +6,7 @@ namespace Inspirum\Arrayable\Tests;
 
 use Inspirum\Arrayable\Arrayable;
 use Inspirum\Arrayable\BaseCollection;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Throwable;
 use function array_map;
@@ -16,9 +17,8 @@ final class BaseCollectionTest extends TestCase
 {
     /**
      * @param array<array<mixed>> $data
-     *
-     * @dataProvider providesToArray
      */
+    #[DataProvider('providesToArray')]
     public function testJsonSerialize(array $data, string|Throwable $result): void
     {
         if ($result instanceof Throwable) {
@@ -41,7 +41,7 @@ final class BaseCollectionTest extends TestCase
     /**
      * @return iterable<array<string, mixed>>
      */
-    public function providesToArray(): iterable
+    public static function providesToArray(): iterable
     {
         yield [
             'data'   => [

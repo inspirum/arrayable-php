@@ -8,6 +8,7 @@ use ArrayIterator;
 use Arrayable as CoreArrayable;
 use Inspirum\Arrayable\Arrayable;
 use Inspirum\Arrayable\Convertor;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Throwable;
@@ -18,9 +19,8 @@ final class ConvertorTest extends TestCase
 {
     /**
      * @param array<mixed> $result
-     *
-     * @dataProvider providesToArray
      */
+    #[DataProvider('providesToArray')]
     public function testToArray(mixed $data, array|Throwable $result, ?int $limit = null): void
     {
         if ($result instanceof Throwable) {
@@ -35,7 +35,7 @@ final class ConvertorTest extends TestCase
     /**
      * @return iterable<array<string, mixed>>
      */
-    public function providesToArray(): iterable
+    public static function providesToArray(): iterable
     {
         yield [
             'data'   => [1, 3, 4],
