@@ -15,7 +15,7 @@
 
 Unfortunately PHP does not have a nice way how to typecast objects to `array`.
 
-There is the `__toString()` magic method for [`\Stringable`](https://www.php.net/manual/en/class.stringable.php) interface (since PHP 8.0) and the `jsonSerialize()` method for [`JsonSerializable`](https://www.php.net/manual/en/class.jsonserializable.php) interface (since PHP 5.4), but `__toArray()` method is not (and will not) be supported – there are just several rejected draft RFC ([object_cast_to_types](https://wiki.php.net/rfc/object_cast_to_types), [to array](https://wiki.php.net/rfc/to-array), ...) that suggests some kind of object to scalar type casting.
+There is the `__toString()` magic method for [`\Stringable`](https://www.php.net/manual/en/class.stringable.php) interface (since PHP 8.0) and the `jsonSerialize()` method for [`\JsonSerializable`](https://www.php.net/manual/en/class.jsonserializable.php) interface (since PHP 5.4), but `__toArray()` method is not (and will not) be supported – there are just several rejected draft RFC ([object_cast_to_types](https://wiki.php.net/rfc/object_cast_to_types), [to array](https://wiki.php.net/rfc/to-array), ...) that suggests some kind of object to scalar type casting.
 
 But so far (at least) there is no way to implement some (not even magic) method to be called when cast to `array`.
 
@@ -95,24 +95,24 @@ class Person implements \Arrayable
 $person = new Person('John Doe', 'j.doe@example.com', 'secret_pwd');
 ```
 
-There is `is_arrayable()` function (or `\Inspirum\Arrayable\Convertor::isArrayable()` method) to check if given data are able to type cast itself to `array`.
+There is `\is_arrayable()` function (or `\Inspirum\Arrayable\Convertor::isArrayable()` method) to check if given data are able to type cast itself to `array`.
 
 ```php
-var_dump(is_arrayable([1, 2, 3])); // bool(true)
-var_dump(is_arrayable(new \ArrayIterator([1, 2, 3]))); // bool(true)
-var_dump(is_arrayable(new \ArrayObject([4, 5, 6]))); // bool(true)
-var_dump(is_arrayable((function () { yield 1; })())); // bool(true)
-var_dump(is_arrayable(1)); // bool(false)
-var_dump(is_arrayable(new \stdClass())); // bool(false)
-var_dump(is_arrayable(new class {})); // bool(false)
-var_dump(is_arrayable(new class implements \Arrayable {})); // bool(true)
-var_dump(is_arrayable($person); // bool(true)
+var_dump(\is_arrayable([1, 2, 3])); // bool(true)
+var_dump(\is_arrayable(new \ArrayIterator([1, 2, 3]))); // bool(true)
+var_dump(\is_arrayable(new \ArrayObject([4, 5, 6]))); // bool(true)
+var_dump(\is_arrayable((function () { yield 1; })())); // bool(true)
+var_dump(\is_arrayable(1)); // bool(false)
+var_dump(\is_arrayable(new \stdClass())); // bool(false)
+var_dump(\is_arrayable(new class {})); // bool(false)
+var_dump(\is_arrayable(new class implements \Arrayable {})); // bool(true)
+var_dump(\is_arrayable($person); // bool(true)
 ```
 
-Then there is `to_array()` function (or `\Inspirum\Arrayable\Convertor::toArray()` method) to recursively cast data to `array`.
+Then there is `\to_array()` function (or `\Inspirum\Arrayable\Convertor::toArray()` method) to recursively cast data to `array`.
 
 ```php
-$data = to_array(new \ArrayIterator([1, $person, (object) ['a' => true]]));
+$data = \to_array(new \ArrayIterator([1, $person, (object) ['a' => true]]));
 
 /**
 var_dump($data);
@@ -133,7 +133,7 @@ There is also helper abstract classes for common use for DAO ([`BaseModel`](./sr
 
 ## System requirements
 
-* [PHP 8.0+](http://php.net/releases/8_0_0.php)
+* [PHP 8.1+](http://php.net/releases/8_1_0.php)
 * [ext-json](http://php.net/json)
 
 
