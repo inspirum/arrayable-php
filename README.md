@@ -197,5 +197,5 @@ The MIT License (MIT). Please see [License File][link-licence] for more informat
 [link-scrutinizer]:         https://scrutinizer-ci.com/g/inspirum/arrayable-php/code-structure
 [link-code-quality]:        https://scrutinizer-ci.com/g/inspirum/arrayable-php
 [link-packagist-stable]:    https://packagist.org/packages/inspirum/arrayable
-[link-packagist-download]:  https://packagist.org/packages/inspirum/arrayable
+[link-packagist-download]:  https://packagist.org/packages/inspirum/arrayable/stats
 [link-phpstan]:             https://github.com/phpstan/phpstan
