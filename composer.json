@@ -2,7 +2,6 @@
   "name": "inspirum/arrayable",
   "description": "PHP arrayable interface for handling casting to an array",
   "keywords": [
-    "inspirum",
     "arrayable",
     "object-to-array"
   ],

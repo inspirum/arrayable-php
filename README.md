@@ -1,7 +1,5 @@
 # Arrayable
 
-**Created as part of [inspishop][link-inspishop] e-commerce platform by [inspirum][link-inspirum] team.**
-
 [![Latest Stable Version][ico-packagist-stable]][link-packagist-stable]
 [![Build Status][ico-workflow]][link-workflow]
 [![Coverage Status][ico-scrutinizer]][link-scrutinizer]
@@ -198,8 +196,6 @@ The MIT License (MIT). Please see [License File][link-licence] for more informat
 [link-workflow]:            https://github.com/inspirum/arrayable-php/actions
 [link-scrutinizer]:         https://scrutinizer-ci.com/g/inspirum/arrayable-php/code-structure
 [link-code-quality]:        https://scrutinizer-ci.com/g/inspirum/arrayable-php
-[link-inspishop]:           https://www.inspishop.cz/
-[link-inspirum]:            https://www.inspirum.cz/
 [link-packagist-stable]:    https://packagist.org/packages/inspirum/arrayable
 [link-packagist-download]:  https://packagist.org/packages/inspirum/arrayable
 [link-phpstan]:             https://github.com/phpstan/phpstan
