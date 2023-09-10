@@ -5,12 +5,9 @@ declare(strict_types=1);
 namespace Inspirum\Arrayable;
 
 use RuntimeException;
-use Traversable;
 use UnexpectedValueException;
 use stdClass;
-use function is_array;
 use function is_iterable;
-use function iterator_to_array;
 use const PHP_INT_MAX;
 
 final class Convertor
@@ -20,7 +17,7 @@ final class Convertor
      */
     public static function isArrayable(mixed $data): bool
     {
-        return is_iterable($data) || $data instanceof Arrayable;
+        return is_iterable($data) || $data instanceof Arrayable || $data instanceof stdClass;
     }
 
     /**
@@ -50,19 +47,22 @@ final class Convertor
             return $data;
         }
 
-        if ($data instanceof Traversable) {
-            $data = iterator_to_array($data);
-        } elseif ($data instanceof Arrayable) {
+        if ($data instanceof Arrayable) {
             $data = $data->__toArray();
         } elseif ($data instanceof stdClass) {
             $data = (array) $data;
         }
 
-        if (is_array($data)) {
+        if (is_iterable($data)) {
+            $arrayData = [];
             foreach ($data as $k => $v) {
-                $data[$k] = self::toArrayWithDepth($v, $limit, $depth + 1);
+                $arrayData[$k] = self::toArrayWithDepth($v, $limit, $depth + 1);
             }
-        } elseif ($depth === 1) {
+
+            return $arrayData;
+        }
+
+        if ($depth === 1) {
             throw new RuntimeException('Cannot cast to array');
         }
 

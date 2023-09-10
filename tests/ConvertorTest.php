@@ -48,7 +48,21 @@ final class ConvertorTest extends TestCase
         ];
 
         yield [
-            'data'   => [
+            'data' => (static function () {
+                $o        = new stdClass();
+                $o->foo   = 'bar';
+                $o->debug = true;
+
+                return $o;
+            })(),
+            'result' => [
+                'foo' => 'bar',
+                'debug' => true,
+            ],
+        ];
+
+        yield [
+            'data' => [
                 2,
                 (static function () {
                     $o        = new stdClass();
@@ -61,14 +75,14 @@ final class ConvertorTest extends TestCase
             'result' => [
                 2,
                 [
-                    'foo'   => 'bar',
+                    'foo' => 'bar',
                     'debug' => true,
                 ],
             ],
         ];
 
         yield [
-            'data'   => new class implements Arrayable {
+            'data' => new class implements Arrayable {
                 /**
                  * @return array<mixed>
                  */
@@ -81,7 +95,7 @@ final class ConvertorTest extends TestCase
         ];
 
         yield [
-            'data'   => new class implements CoreArrayable {
+            'data' => new class implements CoreArrayable {
                 /**
                  * @return array<mixed>
                  */
@@ -94,12 +108,12 @@ final class ConvertorTest extends TestCase
         ];
 
         yield [
-            'data'   => new ArrayIterator([3, 4, 5]),
+            'data' => new ArrayIterator([3, 4, 5]),
             'result' => [3, 4, 5],
         ];
 
         yield [
-            'data'   => (static function () {
+            'data' => (static function () {
                 yield 2.3;
                 yield 8.10;
             })(),
@@ -107,7 +121,7 @@ final class ConvertorTest extends TestCase
         ];
 
         yield [
-            'data'   => [
+            'data' => [
                 1,
                 3,
                 [
@@ -134,32 +148,41 @@ final class ConvertorTest extends TestCase
         ];
 
         yield [
-            'data'   => new ArrayIterator([1, new ArrayIterator([3, new ArrayIterator([4, new ArrayIterator([3, 4, 5])])])]),
+            'data' => new ArrayIterator([
+                1,
+                new ArrayIterator([3, new ArrayIterator([4, new ArrayIterator([3, 4, 5])])]),
+            ]),
             'result' => [1, [3, [4, [3, 4, 5]]]],
         ];
 
         yield [
-            'data'   => new ArrayIterator([1, new ArrayIterator([3, new ArrayIterator([4, new ArrayIterator([3, 4, 5])])])]),
+            'data' => new ArrayIterator([
+                1,
+                new ArrayIterator([3, new ArrayIterator([4, new ArrayIterator([3, 4, 5])])]),
+            ]),
             'result' => [1, new ArrayIterator([3, new ArrayIterator([4, new ArrayIterator([3, 4, 5])])])],
-            'limit'  => 1,
+            'limit' => 1,
         ];
 
         yield [
-            'data'   => new ArrayIterator([1, new ArrayIterator([3, new ArrayIterator([4, new ArrayIterator([3, 4, 5])])])]),
+            'data' => new ArrayIterator([
+                1,
+                new ArrayIterator([3, new ArrayIterator([4, new ArrayIterator([3, 4, 5])])]),
+            ]),
             'result' => [1, [3, [4, new ArrayIterator([3, 4, 5])]]],
-            'limit'  => 3,
+            'limit' => 3,
         ];
 
         yield [
-            'data'   => '1',
+            'data' => '1',
             'result' => new UnexpectedValueException('Limit value should be positive number'),
-            'limit'  => -1,
+            'limit' => -1,
         ];
 
         yield [
-            'data'   => '1',
+            'data' => '1',
             'result' => new UnexpectedValueException('Limit value should be positive number'),
-            'limit'  => 0,
+            'limit' => 0,
         ];
     }
 }
