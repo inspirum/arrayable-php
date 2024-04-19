@@ -7,6 +7,6 @@ parameters:
         - tests
     ignoreErrors:
         -
-            message: "#^Parameter \\#2 \\$limit of static method Inspirum\\\\Arrayable\\\\Convertor\\:\\:toArray\\(\\) expects int<1, max>|null, int|null given\\.$#"
+            message: '#^Parameter \#2 \$limit of static method Inspirum\\Arrayable\\Convertor\:\:toArray\(\) expects int<1, max>|null, int|null given\.$#'
             path: tests/ConvertorTest.php
             count: 1
