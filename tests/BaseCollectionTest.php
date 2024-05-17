@@ -44,14 +44,14 @@ final class BaseCollectionTest extends TestCase
     public static function providesToArray(): iterable
     {
         yield [
-            'data'   => [
+            'data' => [
                 [1, 3, 4],
             ],
             'result' => '[[1,3,4]]',
         ];
 
         yield [
-            'data'   => [
+            'data' => [
                 [1, 3, 4],
                 ['a' => 1, 3, 'c' => true, 4],
             ],

@@ -38,19 +38,19 @@ final class ConvertorTest extends TestCase
     public static function providesToArray(): iterable
     {
         yield [
-            'data'   => [1, 3, 4],
+            'data' => [1, 3, 4],
             'result' => [1, 3, 4],
         ];
 
         yield [
-            'data'   => '1',
+            'data' => '1',
             'result' => new RuntimeException('Cannot cast to array'),
         ];
 
         yield [
             'data' => (static function () {
-                $o        = new stdClass();
-                $o->foo   = 'bar';
+                $o = new stdClass();
+                $o->foo = 'bar';
                 $o->debug = true;
 
                 return $o;
@@ -65,8 +65,8 @@ final class ConvertorTest extends TestCase
             'data' => [
                 2,
                 (static function () {
-                    $o        = new stdClass();
-                    $o->foo   = 'bar';
+                    $o = new stdClass();
+                    $o->foo = 'bar';
                     $o->debug = true;
 
                     return $o;

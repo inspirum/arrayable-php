@@ -48,7 +48,7 @@ abstract class BaseCollection implements Collection
     }
 
     /**
-     * @param TKey   $offset
+     * @param TKey $offset
      * @param TValue $value
      */
     public function offsetSet(mixed $offset, mixed $value): void

@@ -53,12 +53,12 @@ final class BaseModelTest extends TestCase
     public static function providesToArray(): iterable
     {
         yield [
-            'data'   => [1, 3, 4],
+            'data' => [1, 3, 4],
             'result' => '[1,3,4]',
         ];
 
         yield [
-            'data'   => ['a' => 1, 3, 'c' => true, 4],
+            'data' => ['a' => 1, 3, 'c' => true, 4],
             'result' => '{"a":1,"0":3,"c":true,"1":4}',
         ];
     }
