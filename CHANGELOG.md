@@ -9,26 +9,26 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased](https://github.com/inspirum/arrayable-php/compare/v1.3.0...master)
 
 
-## [v1.3.0 (2024-09-05)](https://github.com/inspirum/balikobot-php/compare/v1.2.0...v1.3.0)
+## [v1.3.0 (2024-09-05)](https://github.com/inspirum/arrayable-php/compare/v1.2.0...v1.3.0)
 ### Added
 - Support `list` collections
   - Added [**ListCollection**](./src/ListCollection.php) interface
   - Added [**BaseListCollection**](./src/BaseListCollection.php) abstract class
 
 
-## [v1.2.1 (2023-09-10)](https://github.com/inspirum/balikobot-php/compare/v1.2.0...v1.2.1)
+## [v1.2.1 (2023-09-10)](https://github.com/inspirum/arrayable-php/compare/v1.2.0...v1.2.1)
 ### Fixed
 - Fixed `isArrayable` for `stdClass`
 
 
-## [v1.2.0 (2023-03-19)](https://github.com/inspirum/balikobot-php/compare/v1.1.0...v1.2.0)
+## [v1.2.0 (2023-03-19)](https://github.com/inspirum/arrayable-php/compare/v1.1.0...v1.2.0)
 ### Added
 - Added support for **PHP 8.2**
 ### Removed
 - Removed support for **PHP 8.0**
 
 
-## [v1.1.0 (2022-07-22)](https://github.com/inspirum/balikobot-php/compare/v1.0.0...v1.1.0)
+## [v1.1.0 (2022-07-22)](https://github.com/inspirum/arrayable-php/compare/v1.0.0...v1.1.0)
 ### Added
 - Added [**Collection**](./src/Collection.php) interface
 - Added [**Model**](./src/Model.php) interface
