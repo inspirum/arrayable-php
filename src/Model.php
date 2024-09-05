@@ -10,7 +10,7 @@ use Stringable;
 /**
  * @template TKey of array-key
  * @template TValue
- * @extends \Inspirum\Arrayable\Arrayable<TKey, TValue>
+ * @extends \Inspirum\Arrayable\Arrayable<TKey,TValue>
  */
 interface Model extends Arrayable, JsonSerializable, Stringable
 {

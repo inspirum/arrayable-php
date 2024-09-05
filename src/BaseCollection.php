@@ -22,7 +22,7 @@ use const JSON_THROW_ON_ERROR;
 abstract class BaseCollection implements Collection
 {
     /**
-     * @param array<TKey, TValue> $items
+     * @param array<TKey,TValue> $items
      */
     public function __construct(
         protected array $items = [],
@@ -78,7 +78,7 @@ abstract class BaseCollection implements Collection
     }
 
     /**
-     * @return \Traversable<TKey, TValue>
+     * @return \Traversable<TKey,TValue>
      */
     public function getIterator(): Traversable
     {
@@ -86,7 +86,7 @@ abstract class BaseCollection implements Collection
     }
 
     /**
-     * @return array<TKey, TValue>
+     * @return array<TKey,TValue>
      */
     public function getItems(): array
     {
@@ -94,15 +94,15 @@ abstract class BaseCollection implements Collection
     }
 
     /**
-     * @return array<TKey, array<TItemKey, TItemValue>>
+     * @return array<TKey,array<TItemKey,TItemValue>>
      */
     public function __toArray(): array
     {
-        return array_map(static fn(Arrayable $item): array => $item->__toArray(), $this->items);
+        return array_map(static fn (Arrayable $item): array => $item->__toArray(), $this->items);
     }
 
     /**
-     * @return array<TKey, array<TItemKey, TItemValue>>
+     * @return array<TKey,array<TItemKey,TItemValue>>
      */
     public function toArray(): array
     {
@@ -110,7 +110,7 @@ abstract class BaseCollection implements Collection
     }
 
     /**
-     * @return array<TKey, array<TItemKey, TItemValue>>
+     * @return array<TKey,array<TItemKey,TItemValue>>
      */
     public function jsonSerialize(): array
     {

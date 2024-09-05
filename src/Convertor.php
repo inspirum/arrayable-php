@@ -25,7 +25,7 @@ final class Convertor
      *
      * @param positive-int|null $limit
      *
-     * @return array<int|string, mixed>
+     * @return array<int|string,mixed>
      *
      * @throws \RuntimeException
      */

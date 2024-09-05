@@ -10,17 +10,17 @@ use const JSON_THROW_ON_ERROR;
 /**
  * @template TKey of array-key
  * @template TValue
- * @implements \Inspirum\Arrayable\Model<TKey, TValue>
+ * @implements \Inspirum\Arrayable\Model<TKey,TValue>
  */
 abstract class BaseModel implements Model
 {
     /**
-     * @return array<TKey, TValue>
+     * @return array<TKey,TValue>
      */
     abstract public function __toArray(): array;
 
     /**
-     * @return array<TKey, TValue>
+     * @return array<TKey,TValue>
      */
     public function toArray(): array
     {
@@ -28,7 +28,7 @@ abstract class BaseModel implements Model
     }
 
     /**
-     * @return array<TKey, TValue>
+     * @return array<TKey,TValue>
      */
     public function jsonSerialize(): array
     {

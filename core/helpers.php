@@ -18,7 +18,7 @@ if (function_exists('\to_array') === false) {
     /**
      * Cast anything to array
      *
-     * @return array<int|string, mixed>
+     * @return array<int|string,mixed>
      */
     function to_array(mixed $data, ?int $limit = null): array
     {

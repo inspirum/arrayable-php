@@ -11,7 +11,7 @@ namespace Inspirum\Arrayable;
 interface Arrayable
 {
     /**
-     * @return array<TKey, TValue>
+     * @return array<TKey,TValue>
      */
     public function __toArray(): array;
 }

@@ -33,7 +33,7 @@ final class ConvertorTest extends TestCase
     }
 
     /**
-     * @return iterable<array<string, mixed>>
+     * @return iterable<array<string,mixed>>
      */
     public static function providesToArray(): iterable
     {

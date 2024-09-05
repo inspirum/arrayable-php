@@ -26,7 +26,7 @@ final class BaseCollectionTest extends TestCase
             self::expectExceptionMessage($result->getMessage());
         }
 
-        $items = array_map(fn(array $data): Arrayable => $this->createModel($data), $data);
+        $items = array_map(fn (array $data): Arrayable => $this->createModel($data), $data);
 
         $collection = new class ($items) extends BaseCollection {
         };
@@ -39,7 +39,7 @@ final class BaseCollectionTest extends TestCase
     }
 
     /**
-     * @return iterable<array<string, mixed>>
+     * @return iterable<array<string,mixed>>
      */
     public static function providesToArray(): iterable
     {
@@ -61,7 +61,7 @@ final class BaseCollectionTest extends TestCase
 
     public function testCollection(): void
     {
-        $items = array_map(fn(array $data): Arrayable => $this->createModel($data), ['first' => [1, 2, 3], 'second' => [4, 5, 6], 'third' => [7, 8, 9]]);
+        $items = array_map(fn (array $data): Arrayable => $this->createModel($data), ['first' => [1, 2, 3], 'second' => [4, 5, 6], 'third' => [7, 8, 9]]);
 
         $collection = new class ($items) extends BaseCollection {
         };
@@ -85,9 +85,9 @@ final class BaseCollectionTest extends TestCase
     }
 
     /**
-     * @param array<mixed, mixed> $data
+     * @param array<mixed,mixed> $data
      *
-     * @return \Inspirum\Arrayable\Arrayable<int|string, mixed>
+     * @return \Inspirum\Arrayable\Arrayable<int|string,mixed>
      */
     private function createModel(array $data): Arrayable
     {
