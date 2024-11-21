@@ -24,8 +24,8 @@ final class ConvertorTest extends TestCase
     public function testToArray(mixed $data, array|Throwable $result, ?int $limit = null): void
     {
         if ($result instanceof Throwable) {
-            self::expectException($result::class);
-            self::expectExceptionMessage($result->getMessage());
+            $this->expectException($result::class);
+            $this->expectExceptionMessage($result->getMessage());
         }
 
         self::assertSame(!($result instanceof Throwable), Convertor::isArrayable($data));

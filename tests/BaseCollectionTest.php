@@ -22,8 +22,8 @@ final class BaseCollectionTest extends TestCase
     public function testJsonSerialize(array $data, string|Throwable $result): void
     {
         if ($result instanceof Throwable) {
-            self::expectException($result::class);
-            self::expectExceptionMessage($result->getMessage());
+            $this->expectException($result::class);
+            $this->expectExceptionMessage($result->getMessage());
         }
 
         $items = array_map(fn (array $data): Arrayable => $this->createModel($data), $data);

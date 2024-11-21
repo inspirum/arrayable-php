@@ -19,8 +19,8 @@ final class BaseModelTest extends TestCase
     public function testJsonSerialize(array $data, string|Throwable $result): void
     {
         if ($result instanceof Throwable) {
-            self::expectException($result::class);
-            self::expectExceptionMessage($result->getMessage());
+            $this->expectException($result::class);
+            $this->expectExceptionMessage($result->getMessage());
         }
 
         $model = new class ($data) extends BaseModel {
