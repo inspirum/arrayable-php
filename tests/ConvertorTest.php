@@ -19,6 +19,7 @@ final class ConvertorTest extends TestCase
 {
     /**
      * @param array<mixed> $result
+     * @param positive-int|null $limit
      */
     #[DataProvider('providesToArray')]
     public function testToArray(mixed $data, array|Throwable $result, ?int $limit = null): void
