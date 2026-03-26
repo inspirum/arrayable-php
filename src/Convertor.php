@@ -7,7 +7,9 @@ namespace Inspirum\Arrayable;
 use RuntimeException;
 use UnexpectedValueException;
 use stdClass;
+use function is_int;
 use function is_iterable;
+use function is_string;
 use const PHP_INT_MAX;
 
 final class Convertor
@@ -56,6 +58,10 @@ final class Convertor
         if (is_iterable($data)) {
             $arrayData = [];
             foreach ($data as $k => $v) {
+                if (!is_int($k) && !is_string($k)) {
+                    throw new RuntimeException('Iterable key must be int|string');
+                }
+
                 $arrayData[$k] = self::toArrayWithDepth($v, $limit, $depth + 1);
             }
 
