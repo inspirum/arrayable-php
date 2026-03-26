@@ -58,7 +58,7 @@
       "@test:unit"
     ],
     "test:unit": [
-      "@phpunit --testsuite=Unit"
+      "@phpunit --testsuite=Unit --no-coverage"
     ],
     "test:coverage": [
       "@phpunit --coverage-text --coverage-html=var/phpunit/coverage"
