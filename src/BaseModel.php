@@ -22,7 +22,7 @@ abstract class BaseModel implements Model
     /**
      * @return array<TKey,TValue>
      */
-    public function toArray(): array
+    final public function toArray(): array
     {
         return $this->__toArray();
     }
@@ -30,7 +30,7 @@ abstract class BaseModel implements Model
     /**
      * @return array<TKey,TValue>
      */
-    public function jsonSerialize(): array
+    final public function jsonSerialize(): array
     {
         return $this->__toArray();
     }
@@ -38,7 +38,7 @@ abstract class BaseModel implements Model
     /**
      * @throws \JsonException
      */
-    public function __toString(): string
+    final public function __toString(): string
     {
         return json_encode($this->jsonSerialize(), JSON_THROW_ON_ERROR);
     }

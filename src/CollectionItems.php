@@ -53,7 +53,7 @@ trait CollectionItems
     /**
      * @throws \JsonException
      */
-    public function __toString(): string
+    final public function __toString(): string
     {
         return json_encode($this->jsonSerialize(), JSON_THROW_ON_ERROR);
     }

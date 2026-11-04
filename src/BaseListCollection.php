@@ -95,7 +95,7 @@ abstract class BaseListCollection implements ListCollection
     /**
      * @return list<array<TItemKey,TItemValue>>
      */
-    public function toArray(): array
+    final public function toArray(): array
     {
         return $this->__toArray();
     }
@@ -103,7 +103,7 @@ abstract class BaseListCollection implements ListCollection
     /**
      * @return list<array<TItemKey,TItemValue>>
      */
-    public function jsonSerialize(): array
+    final public function jsonSerialize(): array
     {
         return $this->__toArray();
     }

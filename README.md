@@ -150,6 +150,8 @@ Optional `$depth` parameter (default `512`) sets the maximum nesting depth, like
 
 There are also helper abstract classes for common use for DAO ([`BaseModel`](./src/BaseModel.php)) and collection ([`BaseCollection`](./src/BaseCollection.php), [`BaseListCollection`](./src/BaseListCollection.php)) objects.
 
+Implement `__toArray()`, call `toArray()`. Their `toArray()`, `jsonSerialize()` and `__toString()` are `final` and always return the `__toArray()` data.
+
 
 ## System requirements
 
