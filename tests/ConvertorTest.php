@@ -247,12 +247,14 @@ final class ConvertorTest extends TestCase
         yield [
             'data' => [1, [2, [3]]],
             'result' => [1, [2, [3]]],
+            'limit' => null,
             'depth' => 3,
         ];
 
         yield [
             'data' => [1, [2, [3]]],
             'result' => new RuntimeException('Maximum depth of 2 exceeded'),
+            'limit' => null,
             'depth' => 2,
         ];
 
@@ -283,6 +285,7 @@ final class ConvertorTest extends TestCase
         yield [
             'data' => [1],
             'result' => new InvalidArgumentException('Depth value should be positive number'),
+            'limit' => null,
             'depth' => 0,
         ];
     }
