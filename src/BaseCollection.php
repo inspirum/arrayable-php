@@ -48,11 +48,17 @@ abstract class BaseCollection implements Collection
     }
 
     /**
-     * @param TKey $offset
+     * @param TKey|null $offset
      * @param TValue $value
      */
     public function offsetSet(mixed $offset, mixed $value): void
     {
+        if ($offset === null) {
+            $this->items[] = $value;
+
+            return;
+        }
+
         $this->items[$offset] = $value;
     }
 

@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased](https://github.com/inspirum/arrayable-php/compare/v1.3.0...master)
 ### Fixed
+- Fixed `$collection[] = $item` storing the item under an empty string key in [**BaseCollection**](./src/BaseCollection.php)
 - Fixed `.gitattributes` export-ignore paths so `phpcs.xml` and `phpstan.neon` are not shipped in the package
 
 

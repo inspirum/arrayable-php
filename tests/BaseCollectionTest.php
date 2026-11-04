@@ -77,9 +77,12 @@ final class BaseCollectionTest extends TestCase
         $collection['second'] = $this->createModel(['foo' => 'bar']);
         $collection->offsetAdd($this->createModel(['bar1' => 'foo']));
         $collection->offsetAdd($this->createModel(['bar2' => 'foo']));
+        $collection[] = $this->createModel(['bar3' => 'foo']);
 
         self::assertSame(['foo' => 'bar'], $collection['second']->__toArray());
         self::assertSame(['bar2' => 'foo'], $collection[1]->__toArray());
+        self::assertSame(['bar3' => 'foo'], $collection[2]->__toArray());
+        self::assertFalse(isset($collection['']));
 
         self::assertSame($collection->getItems(), iterator_to_array($collection));
     }
