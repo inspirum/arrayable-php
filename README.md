@@ -100,11 +100,10 @@ var_dump(\is_arrayable([1, 2, 3])); // bool(true)
 var_dump(\is_arrayable(new \ArrayIterator([1, 2, 3]))); // bool(true)
 var_dump(\is_arrayable(new \ArrayObject([4, 5, 6]))); // bool(true)
 var_dump(\is_arrayable((function () { yield 1; })())); // bool(true)
+var_dump(\is_arrayable(new \stdClass())); // bool(true)
+var_dump(\is_arrayable($person)); // bool(true)
 var_dump(\is_arrayable(1)); // bool(false)
-var_dump(\is_arrayable(new \stdClass())); // bool(false)
 var_dump(\is_arrayable(new class {})); // bool(false)
-var_dump(\is_arrayable(new class implements \Arrayable {})); // bool(true)
-var_dump(\is_arrayable($person); // bool(true)
 ```
 
 Then there is `\to_array()` function (or `\Inspirum\Arrayable\Convertor::toArray()` method) to recursively cast data to `array`.
@@ -149,7 +148,7 @@ Optional `$depth` parameter (default `512`) sets the maximum nesting depth, like
 \to_array([1, [2, [3]]], depth: 2); // throws RuntimeException: Maximum depth of 2 exceeded
 ```
 
-There is also helper abstract classes for common use for DAO ([`BaseModel`](./src/BaseModel.php)) and collection ([`BaseCollection`](./src/BaseCollection.php)) objects.
+There are also helper abstract classes for common use for DAO ([`BaseModel`](./src/BaseModel.php)) and collection ([`BaseCollection`](./src/BaseCollection.php), [`BaseListCollection`](./src/BaseListCollection.php)) objects.
 
 
 ## System requirements
