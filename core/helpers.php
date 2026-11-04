@@ -18,10 +18,13 @@ if (function_exists('\to_array') === false) {
     /**
      * Cast anything to array
      *
+     * @param positive-int|null $limit
+     * @param positive-int $depth
+     *
      * @return array<int|string,mixed>
      */
-    function to_array(mixed $data, ?int $limit = null): array
+    function to_array(mixed $data, ?int $limit = null, int $depth = 512): array
     {
-        return Convertor::toArray($data, $limit);
+        return Convertor::toArray($data, $limit, $depth);
     }
 }

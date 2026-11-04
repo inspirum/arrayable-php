@@ -126,6 +126,29 @@ var_dump($data);
 */
 ```
 
+Optional `$limit` parameter sets how many levels are converted, deeper data are returned unchanged.
+
+```php
+$data = \to_array([1, new \ArrayIterator([2, new \ArrayIterator([3])])], limit: 2);
+
+/**
+var_dump($data);
+[
+  0 => 1
+  1 => [
+    0 => 2
+    1 => ArrayIterator([3])
+  ]
+]
+*/
+```
+
+Optional `$depth` parameter (default `512`) sets the maximum nesting depth, like in [`json_encode`](https://www.php.net/manual/en/function.json-encode.php). Deeper data (including self-referencing objects) throw `\RuntimeException`.
+
+```php
+\to_array([1, [2, [3]]], depth: 2); // throws RuntimeException: Maximum depth of 2 exceeded
+```
+
 There is also helper abstract classes for common use for DAO ([`BaseModel`](./src/BaseModel.php)) and collection ([`BaseCollection`](./src/BaseCollection.php)) objects.
 
 

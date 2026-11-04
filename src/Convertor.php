@@ -10,6 +10,7 @@ use stdClass;
 use function is_int;
 use function is_iterable;
 use function is_string;
+use function sprintf;
 use const PHP_INT_MAX;
 
 final class Convertor
@@ -26,26 +27,36 @@ final class Convertor
      * Cast anything to array
      *
      * @param positive-int|null $limit
+     * @param positive-int $depth
      *
      * @return array<int|string,mixed>
      *
      * @throws \RuntimeException
+     * @throws \UnexpectedValueException
      */
-    public static function toArray(mixed $data, ?int $limit = null): array
+    public static function toArray(mixed $data, ?int $limit = null, int $depth = 512): array
     {
-        return self::toArrayWithDepth($data, $limit ?? PHP_INT_MAX, 1);
+        $limit ??= PHP_INT_MAX;
+
+        self::assertPositive($limit, 'Limit');
+        self::assertPositive($depth, 'Depth');
+
+        return self::toArrayAtLevel($data, $limit, $depth, 1);
+    }
+
+    private static function assertPositive(int $value, string $name): void
+    {
+        if ($value <= 0) {
+            throw new UnexpectedValueException(sprintf('%s value should be positive number', $name));
+        }
     }
 
     /**
-     * @return ($depth is 1 ? array<mixed> : mixed)
+     * @return ($level is 1 ? array<mixed> : mixed)
      */
-    private static function toArrayWithDepth(mixed $data, int $limit, int $depth): mixed
+    private static function toArrayAtLevel(mixed $data, int $limit, int $depth, int $level): mixed
     {
-        if ($limit <= 0) {
-            throw new UnexpectedValueException('Limit value should be positive number');
-        }
-
-        if ($depth > $limit) {
+        if ($level > $limit) {
             return $data;
         }
 
@@ -56,19 +67,23 @@ final class Convertor
         }
 
         if (is_iterable($data)) {
+            if ($level > $depth) {
+                throw new RuntimeException(sprintf('Maximum depth of %d exceeded', $depth));
+            }
+
             $arrayData = [];
             foreach ($data as $k => $v) {
                 if (!is_int($k) && !is_string($k)) {
                     throw new RuntimeException('Iterable key must be int|string');
                 }
 
-                $arrayData[$k] = self::toArrayWithDepth($v, $limit, $depth + 1);
+                $arrayData[$k] = self::toArrayAtLevel($v, $limit, $depth, $level + 1);
             }
 
             return $arrayData;
         }
 
-        if ($depth === 1) {
+        if ($level === 1) {
             throw new RuntimeException('Cannot cast to array');
         }
 

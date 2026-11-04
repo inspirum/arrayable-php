@@ -17,20 +17,78 @@ use stdClass;
 
 final class ConvertorTest extends TestCase
 {
+    #[DataProvider('providesIsArrayable')]
+    public function testIsArrayable(mixed $data, bool $result): void
+    {
+        self::assertSame($result, Convertor::isArrayable($data));
+    }
+
+    /**
+     * @return iterable<string,array<string,mixed>>
+     */
+    public static function providesIsArrayable(): iterable
+    {
+        yield 'array' => [
+            'data' => [1, 2],
+            'result' => true,
+        ];
+
+        yield 'iterator' => [
+            'data' => new ArrayIterator([1, 2]),
+            'result' => true,
+        ];
+
+        yield 'generator' => [
+            'data' => (static function () {
+                yield 1;
+            })(),
+            'result' => true,
+        ];
+
+        yield 'stdClass' => [
+            'data' => new stdClass(),
+            'result' => true,
+        ];
+
+        yield 'arrayable' => [
+            'data' => new class implements Arrayable {
+                /**
+                 * @return array<mixed>
+                 */
+                public function __toArray(): array
+                {
+                    return [];
+                }
+            },
+            'result' => true,
+        ];
+
+        yield 'string' => [
+            'data' => '1',
+            'result' => false,
+        ];
+
+        yield 'object' => [
+            'data' => new class {
+            },
+            'result' => false,
+        ];
+    }
+
     /**
      * @param array<mixed> $result
      * @param positive-int|null $limit
+     * @param positive-int $depth
      */
     #[DataProvider('providesToArray')]
-    public function testToArray(mixed $data, array|Throwable $result, ?int $limit = null): void
+    public function testToArray(mixed $data, array|Throwable $result, ?int $limit = null, int $depth = 512): void
     {
         if ($result instanceof Throwable) {
             $this->expectException($result::class);
             $this->expectExceptionMessage($result->getMessage());
         }
 
-        self::assertSame(!($result instanceof Throwable), Convertor::isArrayable($data));
-        self::assertEquals($result, Convertor::toArray($data, $limit));
+        self::assertEquals($result, Convertor::toArray($data, $limit, $depth));
     }
 
     /**
@@ -184,6 +242,41 @@ final class ConvertorTest extends TestCase
             'data' => '1',
             'result' => new UnexpectedValueException('Limit value should be positive number'),
             'limit' => 0,
+        ];
+
+        yield [
+            'data' => [1, [2, [3]]],
+            'result' => [1, [2, [3]]],
+            'depth' => 3,
+        ];
+
+        yield [
+            'data' => [1, [2, [3]]],
+            'result' => new RuntimeException('Maximum depth of 2 exceeded'),
+            'depth' => 2,
+        ];
+
+        yield [
+            'data' => [1, [2, [3]]],
+            'result' => [1, [2, [3]]],
+            'limit' => 2,
+            'depth' => 2,
+        ];
+
+        yield [
+            'data' => (static function () {
+                $o = new stdClass();
+                $o->self = $o;
+
+                return $o;
+            })(),
+            'result' => new RuntimeException('Maximum depth of 512 exceeded'),
+        ];
+
+        yield [
+            'data' => [1],
+            'result' => new UnexpectedValueException('Depth value should be positive number'),
+            'depth' => 0,
         ];
     }
 }

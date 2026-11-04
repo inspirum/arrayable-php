@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 
 ## [Unreleased](https://github.com/inspirum/arrayable-php/compare/v1.3.0...master)
+### Added
+- Added optional `$depth` parameter (default `512`) to `Convertor::toArray()` and `to_array()` that throws `RuntimeException` when data are nested deeper, like `json_encode`
+- Documented `$limit` and `$depth` parameters in README
 ### Changed
 - **Breaking**: [**BaseListCollection**](./src/BaseListCollection.php) throws `OutOfRangeException` when an item is set at a non-integer offset or past the end of the list
 ### Fixed
