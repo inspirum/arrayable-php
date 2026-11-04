@@ -18,13 +18,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - **Breaking**: Added `getItems()` to [**Collection**](./src/Collection.php) and [**ListCollection**](./src/ListCollection.php) interfaces
 - **Breaking**: `Convertor::toArray()` throws `InvalidArgumentException` instead of `UnexpectedValueException` for invalid `$limit`
 - **Breaking**: [**BaseListCollection**](./src/BaseListCollection.php) throws `OutOfRangeException` when an item is set at a non-integer offset or past the end of the list
+- **Breaking**: [**BaseCollection**](./src/BaseCollection.php) throws `InvalidArgumentException` on `$collection[] = $item` instead of storing the item under an empty string key
+- **Breaking**: Moved `offsetAdd()` from [**BaseCollection**](./src/BaseCollection.php) to [**BaseListCollection**](./src/BaseListCollection.php), where `$collection[] = $item` appends too
 - [**BaseListCollection**](./src/BaseListCollection.php) implements [**ListCollection**](./src/ListCollection.php)
 - Switched CI to the shared [inspirum/.github](https://github.com/inspirum/.github) workflow
 - Renamed the default branch from `master` to `main`
 ### Removed
 - Removed local issue and pull request templates, code of conduct and contributing guide in favour of the shared [inspirum/.github](https://github.com/inspirum/.github) defaults
 ### Fixed
-- Fixed `$collection[] = $item` storing the item under an empty string key in [**BaseCollection**](./src/BaseCollection.php)
 - Fixed [**BaseListCollection**](./src/BaseListCollection.php) to stay a `list` after `unset` and when built from a non-list array
 - Fixed `.gitattributes` export-ignore paths so `phpcs.xml` and `phpstan.neon` are not shipped in the package
 - Fixed outdated `is_arrayable` examples in README

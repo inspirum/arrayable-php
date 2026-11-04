@@ -45,10 +45,11 @@ final class BaseListCollectionTest extends TestCase
         $collection = $this->createCollection([[1], [2]]);
 
         $collection[] = $this->createModel([3]);
-        $collection[3] = $this->createModel([4]);
+        $collection->offsetAdd($this->createModel([4]));
+        $collection[4] = $this->createModel([5]);
         $collection[0] = $this->createModel([0]);
 
-        self::assertSame([[0], [2], [3], [4]], $collection->__toArray());
+        self::assertSame([[0], [2], [3], [4], [5]], $collection->__toArray());
         self::assertSame($collection->getItems(), iterator_to_array($collection));
     }
 

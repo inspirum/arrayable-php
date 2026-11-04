@@ -35,11 +35,25 @@ abstract class BaseListCollection extends BaseCollection implements ListCollecti
      */
     public function offsetSet(mixed $offset, mixed $value): void
     {
-        if ($offset !== null && $this->isOutOfRange($offset)) {
+        if ($offset === null) {
+            $this->offsetAdd($value);
+
+            return;
+        }
+
+        if ($this->isOutOfRange($offset)) {
             throw new OutOfRangeException(sprintf('List offset must be an integer between 0 and %d', count($this->items)));
         }
 
         parent::offsetSet($offset, $value);
+    }
+
+    /**
+     * @param TValue $value
+     */
+    public function offsetAdd(mixed $value): void
+    {
+        $this->items[] = $value;
     }
 
     /**

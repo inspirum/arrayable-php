@@ -6,6 +6,7 @@ namespace Inspirum\Arrayable\Tests;
 
 use Inspirum\Arrayable\Arrayable;
 use Inspirum\Arrayable\BaseCollection;
+use InvalidArgumentException;
 use JsonException;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -84,16 +85,23 @@ final class BaseCollectionTest extends TestCase
         self::assertFalse(isset($collection['first']));
         self::assertSame([4, 5, 6], $collection['second']->__toArray());
         $collection['second'] = $this->createModel(['foo' => 'bar']);
-        $collection->offsetAdd($this->createModel(['bar1' => 'foo']));
-        $collection->offsetAdd($this->createModel(['bar2' => 'foo']));
-        $collection[] = $this->createModel(['bar3' => 'foo']);
+        $collection['fourth'] = $this->createModel(['bar' => 'foo']);
 
         self::assertSame(['foo' => 'bar'], $collection['second']->__toArray());
-        self::assertSame(['bar2' => 'foo'], $collection[1]->__toArray());
-        self::assertSame(['bar3' => 'foo'], $collection[2]->__toArray());
-        self::assertFalse(isset($collection['']));
+        self::assertSame(['bar' => 'foo'], $collection['fourth']->__toArray());
 
         self::assertSame($collection->getItems(), iterator_to_array($collection));
+    }
+
+    public function testAppendRequiresOffset(): void
+    {
+        $collection = new class ([]) extends BaseCollection {
+        };
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Collection offset is required, use list collection to append items');
+
+        $collection[] = $this->createModel([1]);
     }
 
     /**

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inspirum\Arrayable;
 
 use ArrayIterator;
+use InvalidArgumentException;
 use Traversable;
 use function array_key_exists;
 use function array_map;
@@ -50,24 +51,16 @@ abstract class BaseCollection implements Collection
     /**
      * @param TKey|null $offset
      * @param TValue $value
+     *
+     * @throws \InvalidArgumentException
      */
     public function offsetSet(mixed $offset, mixed $value): void
     {
         if ($offset === null) {
-            $this->items[] = $value;
-
-            return;
+            throw new InvalidArgumentException('Collection offset is required, use list collection to append items');
         }
 
         $this->items[$offset] = $value;
-    }
-
-    /**
-     * @param TValue $value
-     */
-    public function offsetAdd(mixed $value): void
-    {
-        $this->items[] = $value;
     }
 
     /**
