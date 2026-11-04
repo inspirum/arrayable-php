@@ -39,7 +39,7 @@ jobs:
         run: composer install --prefer-dist --no-interaction --no-progress
       - name: Run linters
         run: |
-          vendor/bin/phpcs src tests
+          vendor/bin/phpcs
           vendor/bin/phpstan analyse -c phpstan.neon
           vendor/bin/composer-dependency-analyser
       - name: Run tests

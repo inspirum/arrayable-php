@@ -74,7 +74,7 @@
       "@style:phpstan"
     ],
     "style:fix": [
-      "@phpcbf src tests"
+      "@phpcbf"
     ],
     "check:dependency": [
       "@composer-dependency-analyser"

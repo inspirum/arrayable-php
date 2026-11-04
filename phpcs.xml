@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ruleset>
     <arg value="sp"/>
+    <file>core</file>
     <file>src</file>
     <file>tests</file>
     <rule ref="InspirumCodingStandard"/>
+    <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
+        <exclude-pattern>core/Arrayable.php</exclude-pattern>
+    </rule>
 </ruleset>
