@@ -6,7 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-## [Unreleased](https://github.com/inspirum/arrayable-php/compare/v1.3.0...master)
+## [Unreleased](https://github.com/inspirum/arrayable-php/compare/v2.0.0...master)
+
+
+## [v2.0.0 (2026-11-04)](https://github.com/inspirum/arrayable-php/compare/v1.3.0...v2.0.0)
 ### Added
 - Added optional `$depth` parameter (default `512`) to `Convertor::toArray()` and `to_array()` that throws `RuntimeException` when data are nested deeper, like `json_encode`
 - Documented `$limit` and `$depth` parameters in README
