@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-## [Unreleased](https://github.com/inspirum/arrayable-php/compare/v2.0.0...master)
+## [Unreleased](https://github.com/inspirum/arrayable-php/compare/v2.0.0...main)
 
 
 ## [v2.0.0 (2026-11-04)](https://github.com/inspirum/arrayable-php/compare/v1.3.0...v2.0.0)
@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - **Breaking**: `Convertor::toArray()` throws `InvalidArgumentException` instead of `UnexpectedValueException` for invalid `$limit`
 - **Breaking**: [**BaseListCollection**](./src/BaseListCollection.php) throws `OutOfRangeException` when an item is set at a non-integer offset or past the end of the list
 - [**BaseListCollection**](./src/BaseListCollection.php) implements [**ListCollection**](./src/ListCollection.php)
+- Switched CI to the shared [inspirum/.github](https://github.com/inspirum/.github) workflow
+- Renamed the default branch from `master` to `main`
+### Removed
+- Removed local issue and pull request templates, code of conduct and contributing guide in favour of the shared [inspirum/.github](https://github.com/inspirum/.github) defaults
 ### Fixed
 - Fixed `$collection[] = $item` storing the item under an empty string key in [**BaseCollection**](./src/BaseCollection.php)
 - Fixed [**BaseListCollection**](./src/BaseListCollection.php) to stay a `list` after `unset` and when built from a non-list array
