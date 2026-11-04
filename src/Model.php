@@ -14,4 +14,8 @@ use Stringable;
  */
 interface Model extends Arrayable, JsonSerializable, Stringable
 {
+    /**
+     * @return array<TKey,TValue>
+     */
+    public function toArray(): array;
 }

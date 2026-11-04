@@ -11,8 +11,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added optional `$depth` parameter (default `512`) to `Convertor::toArray()` and `to_array()` that throws `RuntimeException` when data are nested deeper, like `json_encode`
 - Documented `$limit` and `$depth` parameters in README
 ### Changed
+- **Breaking**: Added `toArray()` to [**Model**](./src/Model.php), [**Collection**](./src/Collection.php) and [**ListCollection**](./src/ListCollection.php) interfaces
+- **Breaking**: Added `getItems()` to [**Collection**](./src/Collection.php) and [**ListCollection**](./src/ListCollection.php) interfaces
 - **Breaking**: `Convertor::toArray()` throws `InvalidArgumentException` instead of `UnexpectedValueException` for invalid `$limit`
 - **Breaking**: [**BaseListCollection**](./src/BaseListCollection.php) throws `OutOfRangeException` when an item is set at a non-integer offset or past the end of the list
+- [**BaseListCollection**](./src/BaseListCollection.php) implements [**ListCollection**](./src/ListCollection.php)
 ### Fixed
 - Fixed `$collection[] = $item` storing the item under an empty string key in [**BaseCollection**](./src/BaseCollection.php)
 - Fixed [**BaseListCollection**](./src/BaseListCollection.php) to stay a `list` after `unset` and when built from a non-list array

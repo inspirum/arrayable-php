@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inspirum\Arrayable\Tests;
 
 use Inspirum\Arrayable\Arrayable;
+use Inspirum\Arrayable\ListCollection;
 use Inspirum\Arrayable\Tests\Fixtures\ListCollectionFixture;
 use OutOfRangeException;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -19,6 +20,7 @@ final class BaseListCollectionTest extends TestCase
     {
         $collection = $this->createCollection(['first' => [1], 'second' => [2]]);
 
+        self::assertInstanceOf(ListCollection::class, $collection);
         self::assertSame([[1], [2]], $collection->__toArray());
         self::assertSame([0, 1], array_keys(iterator_to_array($collection)));
         self::assertSame([2], $collection[1]->__toArray());

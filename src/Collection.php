@@ -21,4 +21,13 @@ use Stringable;
  */
 interface Collection extends ArrayAccess, Countable, IteratorAggregate, Arrayable, JsonSerializable, Stringable
 {
+    /**
+     * @return array<TKey,TValue>
+     */
+    public function getItems(): array;
+
+    /**
+     * @return array<TKey,array<TItemKey,TItemValue>>
+     */
+    public function toArray(): array;
 }

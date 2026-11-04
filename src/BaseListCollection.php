@@ -15,8 +15,9 @@ use function sprintf;
  * @template TItemValue
  * @template TValue of \Inspirum\Arrayable\Arrayable<TItemKey,TItemValue>
  * @extends  \Inspirum\Arrayable\BaseCollection<TItemKey,TItemValue,int,TValue>
+ * @implements \Inspirum\Arrayable\ListCollection<TItemKey,TItemValue,TValue>
  */
-abstract class BaseListCollection extends BaseCollection
+abstract class BaseListCollection extends BaseCollection implements ListCollection
 {
     /**
      * @param array<TValue> $items

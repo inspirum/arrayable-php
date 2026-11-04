@@ -12,4 +12,13 @@ namespace Inspirum\Arrayable;
  */
 interface ListCollection extends Collection
 {
+    /**
+     * @return list<TValue>
+     */
+    public function getItems(): array;
+
+    /**
+     * @return list<array<TItemKey,TItemValue>>
+     */
+    public function toArray(): array;
 }
