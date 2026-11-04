@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Inspirum\Arrayable;
 
 use OutOfRangeException;
+use function array_map;
 use function array_values;
 use function count;
 use function is_int;
@@ -14,17 +15,26 @@ use function sprintf;
  * @template TItemKey of array-key
  * @template TItemValue
  * @template TValue of \Inspirum\Arrayable\Arrayable<TItemKey,TItemValue>
- * @extends  \Inspirum\Arrayable\BaseCollection<TItemKey,TItemValue,int,TValue>
  * @implements \Inspirum\Arrayable\ListCollection<TItemKey,TItemValue,TValue>
  */
-abstract class BaseListCollection extends BaseCollection implements ListCollection
+abstract class BaseListCollection implements ListCollection
 {
+    /**
+     * @use \Inspirum\Arrayable\CollectionItems<int,TValue>
+     */
+    use CollectionItems;
+
+    /**
+     * @var array<int,TValue>
+     */
+    protected array $items;
+
     /**
      * @param array<TValue> $items
      */
     public function __construct(array $items = [])
     {
-        parent::__construct(array_values($items));
+        $this->items = array_values($items);
     }
 
     /**
@@ -45,7 +55,7 @@ abstract class BaseListCollection extends BaseCollection implements ListCollecti
             throw new OutOfRangeException(sprintf('List offset must be an integer between 0 and %d', count($this->items)));
         }
 
-        parent::offsetSet($offset, $value);
+        $this->items[$offset] = $value;
     }
 
     /**
@@ -61,7 +71,7 @@ abstract class BaseListCollection extends BaseCollection implements ListCollecti
      */
     public function offsetUnset(mixed $offset): void
     {
-        parent::offsetUnset($offset);
+        unset($this->items[$offset]);
 
         $this->items = array_values($this->items);
     }
@@ -71,7 +81,7 @@ abstract class BaseListCollection extends BaseCollection implements ListCollecti
      */
     public function getItems(): array
     {
-        return array_values(parent::getItems());
+        return array_values($this->items);
     }
 
     /**
@@ -79,7 +89,7 @@ abstract class BaseListCollection extends BaseCollection implements ListCollecti
      */
     public function __toArray(): array
     {
-        return array_values(parent::__toArray());
+        return array_values(array_map(static fn (Arrayable $item): array => $item->__toArray(), $this->items));
     }
 
     /**

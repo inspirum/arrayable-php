@@ -4,14 +4,8 @@ declare(strict_types=1);
 
 namespace Inspirum\Arrayable;
 
-use ArrayIterator;
 use InvalidArgumentException;
-use Traversable;
-use function array_key_exists;
 use function array_map;
-use function count;
-use function json_encode;
-use const JSON_THROW_ON_ERROR;
 
 /**
  * @template TItemKey of array-key
@@ -23,29 +17,16 @@ use const JSON_THROW_ON_ERROR;
 abstract class BaseCollection implements Collection
 {
     /**
+     * @use \Inspirum\Arrayable\CollectionItems<TKey,TValue>
+     */
+    use CollectionItems;
+
+    /**
      * @param array<TKey,TValue> $items
      */
     public function __construct(
         protected array $items = [],
     ) {
-    }
-
-    /**
-     * @param TKey $offset
-     */
-    public function offsetExists(mixed $offset): bool
-    {
-        return array_key_exists($offset, $this->items);
-    }
-
-    /**
-     * @param TKey $offset
-     *
-     * @return TValue
-     */
-    public function offsetGet(mixed $offset): mixed
-    {
-        return $this->items[$offset];
     }
 
     /**
@@ -69,19 +50,6 @@ abstract class BaseCollection implements Collection
     public function offsetUnset(mixed $offset): void
     {
         unset($this->items[$offset]);
-    }
-
-    public function count(): int
-    {
-        return count($this->items);
-    }
-
-    /**
-     * @return \Traversable<TKey,TValue>
-     */
-    public function getIterator(): Traversable
-    {
-        return new ArrayIterator($this->items);
     }
 
     /**
@@ -114,13 +82,5 @@ abstract class BaseCollection implements Collection
     public function jsonSerialize(): array
     {
         return $this->__toArray();
-    }
-
-    /**
-     * @throws \JsonException
-     */
-    public function __toString(): string
-    {
-        return json_encode($this->jsonSerialize(), JSON_THROW_ON_ERROR);
     }
 }

@@ -20,7 +20,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - **Breaking**: [**BaseListCollection**](./src/BaseListCollection.php) throws `OutOfRangeException` when an item is set at a non-integer offset or past the end of the list
 - **Breaking**: [**BaseCollection**](./src/BaseCollection.php) throws `InvalidArgumentException` on `$collection[] = $item` instead of storing the item under an empty string key
 - **Breaking**: Moved `offsetAdd()` from [**BaseCollection**](./src/BaseCollection.php) to [**BaseListCollection**](./src/BaseListCollection.php), where `$collection[] = $item` appends too
-- [**BaseListCollection**](./src/BaseListCollection.php) implements [**ListCollection**](./src/ListCollection.php)
+- **Breaking**: [**BaseListCollection**](./src/BaseListCollection.php) no longer extends [**BaseCollection**](./src/BaseCollection.php), it implements [**ListCollection**](./src/ListCollection.php) directly
 - Switched CI to the shared [inspirum/.github](https://github.com/inspirum/.github) workflow
 - Renamed the default branch from `master` to `main`
 ### Removed
