@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added optional `$depth` parameter (default `512`) to `Convertor::toArray()` and `to_array()` that throws `RuntimeException` when data are nested deeper, like `json_encode`
 - Documented `$limit` and `$depth` parameters in README
 ### Changed
+- **Breaking**: `Convertor::toArray()` throws `InvalidArgumentException` instead of `UnexpectedValueException` for invalid `$limit`
 - **Breaking**: [**BaseListCollection**](./src/BaseListCollection.php) throws `OutOfRangeException` when an item is set at a non-integer offset or past the end of the list
 ### Fixed
 - Fixed `$collection[] = $item` storing the item under an empty string key in [**BaseCollection**](./src/BaseCollection.php)

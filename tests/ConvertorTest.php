@@ -8,11 +8,11 @@ use ArrayIterator;
 use Arrayable as CoreArrayable;
 use Inspirum\Arrayable\Arrayable;
 use Inspirum\Arrayable\Convertor;
+use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Throwable;
-use UnexpectedValueException;
 use stdClass;
 
 final class ConvertorTest extends TestCase
@@ -234,13 +234,13 @@ final class ConvertorTest extends TestCase
 
         yield [
             'data' => '1',
-            'result' => new UnexpectedValueException('Limit value should be positive number'),
+            'result' => new InvalidArgumentException('Limit value should be positive number'),
             'limit' => -1,
         ];
 
         yield [
             'data' => '1',
-            'result' => new UnexpectedValueException('Limit value should be positive number'),
+            'result' => new InvalidArgumentException('Limit value should be positive number'),
             'limit' => 0,
         ];
 
@@ -275,7 +275,7 @@ final class ConvertorTest extends TestCase
 
         yield [
             'data' => [1],
-            'result' => new UnexpectedValueException('Depth value should be positive number'),
+            'result' => new InvalidArgumentException('Depth value should be positive number'),
             'depth' => 0,
         ];
     }

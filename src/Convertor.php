@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Inspirum\Arrayable;
 
+use InvalidArgumentException;
 use RuntimeException;
-use UnexpectedValueException;
 use stdClass;
 use function is_int;
 use function is_iterable;
@@ -31,8 +31,8 @@ final class Convertor
      *
      * @return array<int|string,mixed>
      *
+     * @throws \InvalidArgumentException
      * @throws \RuntimeException
-     * @throws \UnexpectedValueException
      */
     public static function toArray(mixed $data, ?int $limit = null, int $depth = 512): array
     {
@@ -47,7 +47,7 @@ final class Convertor
     private static function assertPositive(int $value, string $name): void
     {
         if ($value <= 0) {
-            throw new UnexpectedValueException(sprintf('%s value should be positive number', $name));
+            throw new InvalidArgumentException(sprintf('%s value should be positive number', $name));
         }
     }
 
