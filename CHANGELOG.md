@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 
 ## [Unreleased](https://github.com/inspirum/arrayable-php/compare/v1.3.0...master)
+### Fixed
+- Fixed `.gitattributes` export-ignore paths so `phpcs.xml` and `phpstan.neon` are not shipped in the package
 
 
 ## [v1.3.0 (2024-09-05)](https://github.com/inspirum/arrayable-php/compare/v1.2.0...v1.3.0)
