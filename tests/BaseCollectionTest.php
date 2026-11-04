@@ -6,12 +6,14 @@ namespace Inspirum\Arrayable\Tests;
 
 use Inspirum\Arrayable\Arrayable;
 use Inspirum\Arrayable\BaseCollection;
+use JsonException;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Throwable;
 use function array_map;
 use function iterator_to_array;
 use function json_encode;
+use const INF;
 
 final class BaseCollectionTest extends TestCase
 {
@@ -56,6 +58,13 @@ final class BaseCollectionTest extends TestCase
                 ['a' => 1, 3, 'c' => true, 4],
             ],
             'result' => '[[1,3,4],{"a":1,"0":3,"c":true,"1":4}]',
+        ];
+
+        yield [
+            'data' => [
+                ['a' => INF],
+            ],
+            'result' => new JsonException('Inf and NaN cannot be JSON encoded'),
         ];
     }
 

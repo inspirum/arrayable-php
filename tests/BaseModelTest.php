@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Inspirum\Arrayable\Tests;
 
 use Inspirum\Arrayable\BaseModel;
+use JsonException;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Throwable;
 use function json_encode;
+use const INF;
 
 final class BaseModelTest extends TestCase
 {
@@ -60,6 +62,11 @@ final class BaseModelTest extends TestCase
         yield [
             'data' => ['a' => 1, 3, 'c' => true, 4],
             'result' => '{"a":1,"0":3,"c":true,"1":4}',
+        ];
+
+        yield [
+            'data' => ['a' => INF],
+            'result' => new JsonException('Inf and NaN cannot be JSON encoded'),
         ];
     }
 }

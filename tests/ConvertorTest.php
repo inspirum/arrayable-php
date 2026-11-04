@@ -274,6 +274,13 @@ final class ConvertorTest extends TestCase
         ];
 
         yield [
+            'data' => (static function () {
+                yield new stdClass() => 1;
+            })(),
+            'result' => new RuntimeException('Iterable key must be int|string'),
+        ];
+
+        yield [
             'data' => [1],
             'result' => new InvalidArgumentException('Depth value should be positive number'),
             'depth' => 0,
